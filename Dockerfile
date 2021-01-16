@@ -1,5 +1,5 @@
 # Dockerfile with tensorflow gpu support on python3, opencv3.3
-FROM tensorflow/tensorflow:1.8.0-py3
+FROM tensorflow/tensorflow:latest-gpu
 MAINTAINER Fergal Cotter <fbc23@cam.ac.uk>
 
 # The code below is all based off the repos made by https://github.com/janza/
@@ -34,10 +34,17 @@ RUN pip3 --no-cache-dir install \
     hdf5storage \
     h5py \
     scipy \
-    py3nvml
+    py3nvml \
+    matplotlib \
+    pillow \
+    scikit-learn \
+    tensorflow-datasets \
+    pandas \
+    tensorboard_plugin_profile \
+    virtualenv
 
 WORKDIR /
-ENV OPENCV_VERSION="3.4.1"
+ENV OPENCV_VERSION="4.0.1"
 RUN wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip \
 && unzip ${OPENCV_VERSION}.zip \
 && mkdir /opencv-${OPENCV_VERSION}/cmake_binary \
